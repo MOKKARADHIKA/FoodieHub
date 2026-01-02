@@ -1,0 +1,88 @@
+.about-container {
+  max-width: 900px;
+  margin-left: 250px;
+  margin-top: 100px;
+  background: #fff;
+  padding: 50px 40px 60px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  line-height: 1.7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #444;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.about-container:hover {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+.about-title {
+  text-align: center;
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 35px;
+  color: #2c3e50;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.about-title::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  background: #e67e22;
+  margin: 12px auto 0;
+  border-radius: 3px;
+}
+
+.about-subtitle {
+  margin-top: 45px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #34495e;
+  border-left: 6px solid #e67e22;
+  padding-left: 12px;
+  letter-spacing: 0.7px;
+}
+
+.about-text {
+  font-size: 18px;
+  color: #555;
+  margin-top: 18px;
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.about-text strong {
+  color: #e67e22;
+  font-weight: 700;
+}
+
+.about-list {
+  margin-top: 20px;
+  padding-left: 25px;
+  font-size: 18px;
+  color: #555;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-type: disc;
+}
+
+.about-list li {
+  margin-bottom: 14px;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.about-list li:hover {
+  color: #e67e22;
+  cursor: default;
+}

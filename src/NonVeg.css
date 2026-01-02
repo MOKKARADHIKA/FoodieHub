@@ -1,0 +1,126 @@
+/* MAIN CONTAINER */
+.veg-container {
+  
+  width: 1310px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* HEADING */
+.veg-heading {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* GRID LAYOUT (3 per row) */
+.veg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* CARD */
+.veg-card {
+  background: rgb(238, 233, 233);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(124, 9, 53, 0.1);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  
+}
+
+/* IMAGE */
+.veg-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* TITLE & PRICE */
+.veg-card-title {
+  font-size: 20px;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.veg-card-price {
+  color: #ff6600;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.veg-card-desc {
+  font-size: 14px;
+  color: #971c18;
+  margin: 10px 0;
+}
+
+
+/* CARD HOVER EFFECT */
+.veg-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(150, 65, 65, 0.2);
+  transition: 0.3s ease-in-out;
+  background: #c9d68c;
+}
+
+
+/* BUTTON */
+.veg-btn {
+  padding: 8px 15px;
+  background-color: #ac4141;
+  color: rgb(221, 228, 222);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+.veg-btn:hover {
+  background-color: #ff6600;
+}
+
+/* PAGINATION */
+.pagination {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination .active {
+  background: #ac4141;
+  color: white;
+  font-weight: bold;
+}
+
+.pagination button:hover:not(.active) {
+  background: #1e1097;
+}
+
+/* RESPONSIVE (Mobile) */
+@media (max-width: 768px) {
+  .veg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .veg-grid {
+    grid-template-columns: 1fr;
+  }
+}
