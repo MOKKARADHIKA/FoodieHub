@@ -12,7 +12,7 @@ import {
   CLEAR_CART,
 } from "./Store";
 import SendOrderEmail from "./SendOrderEmail";
-import "./cart.css";
+import "./Cart.css";
 import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
