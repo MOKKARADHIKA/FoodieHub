@@ -44,6 +44,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/" element={<RegisterForm />} />
+            <Route path="/registerform" element={<RegisterForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/search" element={<SearchResults />} />
         </Routes>

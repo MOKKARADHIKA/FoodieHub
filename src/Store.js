@@ -87,13 +87,31 @@ const cartSlice = createSlice({
 
 
 // ===================== Veg products fetch thunk =====================
+// export const fetchVegProducts = createAsyncThunk(
+//   "vegProducts/fetch",
+//   async () => {
+//     const response = await axios.get("/api/v1/products/vegProducts");
+//     return response.data;
+//   }
+// );
+
+
 export const fetchVegProducts = createAsyncThunk(
-  "vegProducts/fetch",
-  async () => {
-    const response = await axios.get("/api/v1/products/vegProducts");
-    return response.data;
+  "veg/fetchVegProducts",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiurl.get(
+        "/api/v1/products/vegProducts"
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || error.message
+      );
+    }
   }
 );
+
 // ===================== Non-veg products fetch thunk =====================
 // export const fetchNonVegProducts = createAsyncThunk(
 //   "nonVegProducts/fetch",
@@ -177,8 +195,32 @@ export const getAllOrders = createAsyncThunk(
 //       });
 //   },
 // });
+// const vegSlice = createSlice({
+//   name: "vegProducts",
+//   initialState: {
+//     vegProducts: [],
+//     loading: false,
+//     error: null,
+//   },
+//   reducers: {},
+//   extraReducers: (builder) => {
+//     builder
+//       .addCase(fetchVegProducts.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(fetchVegProducts.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.vegProducts = action.payload; // <-- data from API
+//       })
+//       .addCase(fetchVegProducts.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.error.message;
+//       });
+//   },
+// });
+
 const vegSlice = createSlice({
-  name: "vegProducts",
+  name: "veg",
   initialState: {
     vegProducts: [],
     loading: false,
@@ -189,17 +231,19 @@ const vegSlice = createSlice({
     builder
       .addCase(fetchVegProducts.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchVegProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.vegProducts = action.payload; // <-- data from API
+        state.vegProducts = action.payload;
       })
       .addCase(fetchVegProducts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload || action.error.message;
       });
   },
 });
+
 // ===================== NonVeg slice =====================
 const nonVegSlice = createSlice({
   name: "nonVeg",
@@ -301,11 +345,27 @@ const ordersSlice = createSlice({
 // ===================== USER SLICE (Registration + Login Combined) =====================
 
 // Registration thunk
+// export const registerUser = createAsyncThunk(
+//   "user/registerUser",
+//   async (userData, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.post(
+//         "/api/v1/products/register",
+//         userData
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(
+//         error.response?.data?.message || error.message || "Registration failed"
+//       );
+//     }
+//   }
+// );
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await apiurl.post(
         "/api/v1/products/register",
         userData
       );
@@ -318,12 +378,29 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+
 // Login thunk
+// export const userLogin = createAsyncThunk(
+//   "user/login",
+//   async ({ email, password }, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.post(
+//         "/api/v1/products/login",
+//         { email, password }
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(
+//         error.response?.data?.message || "Login failed"
+//       );
+//     }
+//   }
+// );
 export const userLogin = createAsyncThunk(
   "user/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await apiurl.post(
         "/api/v1/products/login",
         { email, password }
       );
@@ -335,6 +412,7 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
+
 
 
 // User slice (same — no disturbance)

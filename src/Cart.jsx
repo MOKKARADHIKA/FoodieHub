@@ -47,7 +47,7 @@ function Cart() {
   const gstAmount = (priceAfterDiscount * 18) / 100;
   const netAmount = priceAfterDiscount + gstAmount;
 
-  const upiId = "sandhyakolakani26@okhdfcbank";
+  const upiId = "6305892838@ybl";
   const payerName = "Food Store";
   const upiLink = `upi://pay?pa=${upiId}&pn=${payerName}&am=${totalAmount}&cu=INR`;
 
@@ -244,6 +244,14 @@ function Cart() {
             <a href="mailto:support@bigbasket.com" className="text-info">
               support@FoodieHub.com
             </a>
+           <div className="mt-2">
+            <a href="#" className="text-white me-3">
+              Privacy Policy
+            </a>
+            <a href="#" className="text-white">
+              Terms & Conditions
+            </a>
+          </div>
           </p>
         </div>
       </footer>
