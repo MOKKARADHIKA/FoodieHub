@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./Veg.css";  // using same CSS as Veg component
+import "./Veg.css";
 import { addToCart } from "./Store";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 function Fruits() {
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ function Fruits() {
 
   const itemsPerPage = 3;
   const totalPages = Math.ceil(fruitItems.length / itemsPerPage);
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLast = currentPage * itemsPerPage;
@@ -37,9 +37,8 @@ function Fruits() {
       <h1 className="veg-heading">Welcome to Fruits section...</h1>
 
       <div className="veg-grid">
-        {currentItems.map((item, index) => (
-          <div key={index} className="veg-card">
-
+        {currentItems.map((item) => (
+          <div key={item.id} className="veg-card">
             <img src={item.img} alt={item.name} className="veg-card-img" />
 
             <div className="veg-card-body">
@@ -49,66 +48,40 @@ function Fruits() {
             </div>
 
             <div className="veg-card-footer">
-              <button className="veg-btn" onClick={() => dispatch(addToCart(item))}>
+              <button
+                className="veg-btn"
+                onClick={() => {
+                  dispatch(addToCart(item));
+                  toast.success(`Product ${item.name} added successfully!`);
+                }}
+              >
                 Add to Cart
               </button>
             </div>
-
           </div>
         ))}
       </div>
 
+      {/* Pagination */}
       <div className="pagination">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage(page => page - 1)}
-        >
+        <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => p - 1)}>
           Previous
         </button>
 
-        {Array.from({ length: totalPages }).map((_, pageIndex) => (
+        {Array.from({ length: totalPages }).map((_, i) => (
           <button
-            key={pageIndex}
-            className={currentPage === pageIndex + 1 ? "active" : ""}
-            onClick={() => setCurrentPage(pageIndex + 1)}
+            key={i}
+            className={currentPage === i + 1 ? "active" : ""}
+            onClick={() => setCurrentPage(i + 1)}
           >
-            {pageIndex + 1}
+            {i + 1}
           </button>
         ))}
 
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => setCurrentPage(page => page + 1)}
-        >
+        <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(p => p + 1)}>
           Next
         </button>
       </div>
-      <footer
-        className="text-white text-center py-4 mt-5"
-        style={{ backgroundColor: '#1f3a20', borderRadius: '20px', padding: '30px' }}
-      >
-        <div className="container-fluid">
-          <p className="mb-1">© {new Date().getFullYear()} FoodieHub. All rights reserved.</p>
-          <p className="mb-0">
-            📍 Address: 123 Grocery Street, Hyderabad, India | 📞 +91 6305892838
-          </p>
-          <p className="mb-0">
-            📧 Email:{' '}
-            <a href="mailto:support@bigbasket.com" className="text-info">
-              support@FoodieHub.com
-            </a>
-          </p>
-          <div className="mt-2">
-            <a href="#" className="text-white me-3">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-white">
-              Terms & Conditions
-            </a>
-          </div>
-        </div>
-      </footer>
-
     </div>
   );
 }

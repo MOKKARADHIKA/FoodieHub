@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Veg.css";   // using same styling file
 import { addToCart } from "./Store";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 function Chocolates() {
   const dispatch = useDispatch();
@@ -49,9 +50,15 @@ function Chocolates() {
             </div>
 
             <div className="veg-card-footer">
-              <button className="veg-btn" onClick={() => dispatch(addToCart(item))}>
-                Add to Cart
-              </button>
+             <button
+                             className="veg-btn"
+                             onClick={() => {
+                               dispatch(addToCart(item));
+                               toast.success(`Product ${item.name} added successfully!`);
+                             }}
+                           >
+                             Add to Cart
+                           </button>
             </div>
 
           </div>
