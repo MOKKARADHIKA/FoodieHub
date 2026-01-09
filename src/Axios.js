@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const apiurl=axios.create({
-    baseURL:"https://backend-radhika502.vercel.app/",
+    baseURL:"https://backend-express-rho.vercel.app",
 });
 
 
