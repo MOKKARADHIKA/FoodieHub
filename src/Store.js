@@ -90,7 +90,7 @@ const cartSlice = createSlice({
 export const fetchVegProducts = createAsyncThunk(
   "vegProducts/fetch",
   async () => {
-    const response = await axios.get("http://localhost:3000/api/v1/products/vegProducts");
+    const response = await axios.get("/api/v1/products/vegProducts");
     return response.data;
   }
 );
@@ -98,7 +98,7 @@ export const fetchVegProducts = createAsyncThunk(
 export const fetchNonVegProducts = createAsyncThunk(
   "nonVegProducts/fetch",
   async () => {
-    const response = await axios.get("http://localhost:3000/api/v1/products/nonVegProducts");
+    const response = await axios.get("/api/v1/products/nonVegProducts");
     return response.data;
   }
 );
@@ -272,7 +272,7 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/products/register",
+        "/api/v1/products/register",
         userData
       );
       return response.data;
@@ -290,7 +290,7 @@ export const userLogin = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/products/login",
+        "/api/v1/products/login",
         { email, password }
       );
       return response.data;
