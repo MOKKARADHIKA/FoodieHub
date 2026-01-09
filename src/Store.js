@@ -95,13 +95,42 @@ export const fetchVegProducts = createAsyncThunk(
   }
 );
 // ===================== Non-veg products fetch thunk =====================
+// export const fetchNonVegProducts = createAsyncThunk(
+//   "nonVegProducts/fetch",
+//   async () => {
+//     const response = await axios.get("/api/v1/products/nonVegProducts");
+//     return response.data;
+//   }
+// );
+
+
+// export const fetchNonVegProducts = () => async (dispatch) => {
+//   try {
+//     dispatch(fetchNonVegStart());
+//     const response = await apiurl.get(
+//       "/api/v1/products/nonVegProducts"
+//     );
+//     dispatch(fetchNonVegSuccess(response.data));
+//   } catch (error) {
+//     dispatch(fetchNonVegFailure(error.message));
+//   }
+// };
+
 export const fetchNonVegProducts = createAsyncThunk(
-  "nonVegProducts/fetch",
-  async () => {
-    const response = await axios.get("/api/v1/products/nonVegProducts");
-    return response.data;
+  "nonVeg/fetchNonVegProducts",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiurl.get(
+        "/api/v1/products/nonVegProducts"
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
   }
 );
+
+
 
 
 
@@ -189,10 +218,15 @@ const nonVegSlice = createSlice({
         state.loading = false;
         state.nonVegProducts = action.payload; // set the data from API
       })
+      // .addCase(fetchNonVegProducts.rejected, (state, action) => {
+      //   state.loading = false;
+      //   state.error = action.error.message;
+      // });
       .addCase(fetchNonVegProducts.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
+  state.loading = false;
+  state.error = action.payload || action.error.message;
+});
+
   },
 });
 const nonVegReducer = nonVegSlice.reducer;
